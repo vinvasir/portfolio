@@ -1,0 +1,64 @@
+<script>
+
+    $(function(){
+        var display="";
+        $(".num").click(function(){
+            display += $(this).html();
+            console.log(display);
+            $(".calc-display").html(display);            
+        });
+        
+        $(".ce").click(function(){
+            display="";
+            $(".calc-display").html(display);
+        });
+        
+        $(".del").click(function(){
+           display = display.slice(0,-1);
+           $(".calc-display").html(display);
+        });
+        
+        $(".eq").click(function(){
+            display = eval(display);
+            $(".calc-display").html(display);            
+        });
+    });
+</script>
+
+<div class="container-fluid">
+    <div class="booyah-calc col-xs-offset-4">
+        <div class="calc-display col-xs-8">
+            <p>Press some buttons</p>
+        </div>
+        <div class="booyah-row clr">
+            <button class="btn btn-small col-xs-1 ce">CE</button>
+            <button class="btn btn-small col-xs-1">AC</button>
+            <button class="btn btn-small col-xs-1">MR</button>
+            <button class="btn btn-small col-xs-1 eq">=</button>               
+        </div><br />        
+        <div class="booyah-row clr">
+            <button class="btn btn-small col-xs-1 num">1</button>
+            <button class="btn btn-small col-xs-1 num">2</button>
+            <button class="btn btn-small col-xs-1 num">3</button>
+            <button class="btn btn-small col-xs-1 num">+</button>               
+        </div><br />
+        <div class="booyah-row clr">
+            <button class="btn btn-small col-xs-1 num">4</button>
+            <button class="btn btn-small col-xs-1 num">5</button>
+            <button class="btn btn-small col-xs-1 num">6</button>
+            <button class="btn btn-small col-xs-1 num">-</button>               
+        </div><br />
+        <div class="booyah-row clr">
+            <button class="btn btn-small col-xs-1 num">7</button>
+            <button class="btn btn-small col-xs-1 num">8</button>
+            <button class="btn btn-small col-xs-1 num">9</button>
+            <button class="btn btn-small col-xs-1 num">*</button>               
+        </div><br />
+        <div class="booyah-row clr">
+            <button class="btn btn-small col-xs-1 del">DEL</button>
+            <button class="btn btn-small col-xs-1 num">0</button>
+            <button class="btn btn-small col-xs-1 num">.</button>
+            <button class="btn btn-small col-xs-1 num">/</button>               
+        </div><br />         
+    </div>
+</div>
