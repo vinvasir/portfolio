@@ -22,32 +22,34 @@
         var calc = new Calculator();
         
         var display="";
+        var dispWindow = $(".calc-display");
+        
         $(".num").click(function(){
             display += $(this).html();
             console.log(display);
-            $(".calc-display").html(display);            
+            dispWindow.html(display);            
         });
         
         $(".ce").click(function(){
             display="";
-            $(".calc-display").html(display);
+            dispWindow.html(display);
         });
         
         $(".del").click(function(){
            display = display.slice(0,-1);
-           $(".calc-display").html(display);
+           dispWindow.html(display);
         });
         
         $(".eq").click(function(){
             display = eval(display);
-            $(".calc-display").html(display);            
+            dispWindow.html(display);            
         });
     });
 </script>
 
 <div class="container-fluid">
     <div class="booyah-calc col-xs-offset-4">
-        <div class="calc-display col-xs-8">
+        <div class="calc-display col-xs-5">
             <p>Press some buttons</p>
         </div>
         <div class="booyah-row clr">
