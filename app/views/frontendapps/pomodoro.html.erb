@@ -1,0 +1,206 @@
+<script>
+  $(function(){
+
+    var theWatch = new StopWatch(); 
+    var theBreakTimer = new BreakTimer();    
+
+    function BreakTimer(){
+      var time= 5 * 60,
+      min,
+      sec,
+      outPut="",
+      started,
+      running=0,
+      callInterval,
+      timeText = $("#timeText"),
+      breakNum = $("#breakNum");;
+      
+      var stop = function(){
+        if(running==1){
+          running=0;
+          clearInterval(callInterval);
+          time = parseInt(breakNum.html(), 10) * 60;
+        }
+      };      
+      
+      var timeFormat = function(){
+        min = Math.floor(time / 60);
+        sec = Math.floor(time % 60);
+        
+        if(sec < 10){
+          sec = "0" + sec;
+        }
+        
+        outPut = "Break Time! " + min + ":" + sec; 
+        
+        timeText.html(outPut);
+      };
+      
+      var run = function(){
+        callInterval = setInterval(function(){
+          time--;
+          
+          timeFormat();
+          
+          if(time<=0){
+            stop();
+            theWatch.start();
+          }
+          
+        }, 1000);        
+      };
+      
+      this.start = function(){
+        if(running == 0){
+          run();
+          running=1;
+        }
+      };
+      
+      this.sessionUp = function(){
+        time = parseInt(breakNum.html(), 10) + 1;
+        breakNum.html(time);
+        time *= 60;
+      };
+      
+      this.sessionDown = function(){
+        time = parseInt(breakNum.html(), 10) - 1;
+        breakNum.html(time);
+        time *= 60;
+      };      
+    };
+
+    function StopWatch(){
+      var time= 25 * 60,
+      min,
+      sec,
+      outPut="",
+      started,
+      running=0,
+      callInterval,
+      timeText = $("#timeText"),
+      seshNum = $("#sessionNum");
+      
+      var timeFormat = function(){
+        min = Math.floor(time / 60);
+        sec = Math.floor(time % 60);
+        
+        if(sec < 10){
+          sec = "0" + sec;
+        }
+        
+        outPut = "" + min + ":" + sec; 
+        
+        timeText.html(outPut);
+      };
+      
+      var run = function(){
+        callInterval = setInterval(function(){
+          time--;
+          
+          timeFormat();
+          
+          if(time <= 0){
+            this.stop();
+            theBreakTimer.start();
+          }
+          
+        }, 1000);        
+      };
+      
+      this.start = function(){
+        if(running == 0){
+          run();
+          running=1;
+        }
+      };  
+      
+      this.stop = function(){
+        if(running==1){
+          running=0;
+          clearInterval(callInterval);
+        }
+      };
+      
+      this.reset = function(){
+        this.stop();
+        time = parseInt(seshNum.html(), 10) * 60;
+        $("#timeText").html(seshNum + ":00");
+        timeFormat();
+      };
+      
+      this.sessionUp = function(){
+        time = parseInt(seshNum.html(), 10) + 1;
+        seshNum.html(time);
+        time *= 60;
+        timeFormat();
+      };
+      
+      this.sessionDown = function(){
+        time = parseInt(seshNum.html(), 10) - 1;
+        seshNum.html(time);
+        time *= 60;
+        timeFormat();        
+      };
+    }  
+    
+    
+    $(".starter").click(function(){
+      theWatch.start();
+    });
+    
+    $(".stopper").click(function(){
+      theWatch.stop();
+      theBreakTimer.stop();
+    });
+    
+    $(".resetter").click(function(){
+      theWatch.reset();
+    });
+    
+    $(".sessionPlusButton").click(function(){
+      theWatch.sessionUp();
+    })
+    
+    $(".sessionMinusButton").click(function(){
+      theWatch.sessionDown();
+    });
+    
+    $(".breakPlusButton").click(function(){
+      theBreakTimer.sessionUp();
+    });    
+    
+    $(".breakMinusButton").click(function(){
+      theBreakTimer.sessionDown();
+    });
+  });
+    
+    
+    
+
+</script>
+
+
+<div class="container-fluid">
+    <div class="col-xs-offset-4">
+        <div class="settings clr col-xs-6">
+          <p>Break Length: <br /><button class="btn btn-sm btn-round breakMinusButton">-</button> <span id="breakNum">5</span> min</p> <button class="btn btn-sm btn-round breakPlusButton">+</button>
+        </div>
+      
+        <div class="settings clr col-xs-6">
+          <p>Session Length: <br /><button class="btn btn-sm btn-round sessionMinusButton">-</button> <span id="sessionNum">25</span> min</p> <button class="btn btn-sm btn-round sessionPlusButton">+</button>
+        </div>
+        
+        <div class="timer-display clr col-xs-offset-1">
+            <p id ="timeText">25:00</p>
+        </div><br /><br />
+        
+        <div class="timer-buttons">
+            <button class="btn btn-primary starter">start</button>
+            
+            <button class="btn btn-primary stopper">stop</button>
+            
+            <button class="btn btn-primary resetter">reset</button>
+        </div>
+    </div>
+</div>

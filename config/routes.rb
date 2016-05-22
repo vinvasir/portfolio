@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :frontendapps, only: :index
   get 'frontendapps/calc', :to => 'frontendapps#calc'
   get 'frontendapps/oocalc', :to => 'frontendapps#oocalc'
+  get 'frontendapps/pomodoro', :to => 'frontendapps#pomodoro'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -5,4 +5,9 @@ class FrontendappsController < ApplicationController
     def calc
     end
     
+    def oocalc
+    end
+    
+    def pomodoro
+    end
 end
