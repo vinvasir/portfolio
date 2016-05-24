@@ -10,4 +10,7 @@ class FrontendappsController < ApplicationController
     
     def pomodoro
     end
+    
+    def tictactoe
+    end
 end

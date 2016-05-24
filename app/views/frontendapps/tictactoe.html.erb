@@ -1,0 +1,121 @@
+<script>
+    $(function(){
+      
+      //just a toy-clicker to see if jquery's working
+        
+        var toyState = new State();
+        $("h1").click(function(){
+          toyState.board.push("X");
+          console.log(toyState.board);
+        })
+        
+        $(".square").click(function(){
+          var selectedIndex = $(this).data("index");
+          toyState.changeTurn();
+          console.log("You selected the index position " + selectedIndex);
+          if(toyState.validMove(toyState.board[selectedIndex]) === true){
+            
+            toyState.board[selectedIndex] = toyState.turn;
+            $(this).html(toyState.turn);
+            console.log("The board is now " + toyState.board);
+          } else {
+            alert("Please click on an unoccupied square!");
+            toyState.changeTurn();
+          }
+          toyState.gameOver();
+        });
+      //now the real app begins
+      
+      function Game(){
+        
+      };
+      
+      function State(){
+        
+        this.board = [" ", " ", " ", " ", " ", " ", " ", " ", " "];
+        
+        this.turn = "";
+        
+        this.changeTurn = function(){
+          this.turn = this.turn === "X" ? "O" : "X";
+        };
+        
+        this.isInArray = function(value, array) {
+          return array.indexOf(value) > -1;
+        }        
+        
+        this.gameOver = function(){
+          var B = this.board;
+  
+          //check rows
+          for(var i = 0; i <= 6; i = i + 3) {
+              if(B[i] !== " " && B[i] === B[i + 1] && B[i + 1] == B[i + 2]) {
+                  this.result = B[i] + "-won"; //update the state result
+                  alert(B[i] + " won!");
+                  $(".square").html(" ");                  
+              }
+          }
+  
+          //check columns
+          for(var i = 0; i <= 2 ; i++) {
+              if(B[i] !== " " && B[i] === B[i + 3] && B[i + 3] === B[i + 6]) {
+                  this.result = B[i] + "-won"; //update the state result
+                  alert(B[i] + " won!");
+                  $(".square").html(" "); 
+              }
+          }
+  
+          //check diagonals
+          for(var i = 0, j = 4; i <= 2 ; i = i + 2, j = j - 2) {
+              if(B[i] !== " " && B[i] == B[i + j] && B[i + j] === B[i + 2*j]) {
+                  this.result = B[i] + "-won"; //update the state result
+                  alert(B[i] + " won!");
+                  $(".square").html(" ");                   
+              }
+          }          
+          
+          if(this.isInArray(" ", this.board) === false){
+            alert("It's a tie!");
+            this.board = [" ", " ", " ", " ", " ", " ", " ", " ", " "];
+            $(".square").html(" ");
+          }
+          
+          
+        };
+        
+        this.validMove = function(square){
+          if(square === " " ){
+            return true;
+          } else {
+            return false;
+          }
+        };
+      };
+      
+      function Player(){
+        
+      };
+      
+      function AI(){
+        
+      };
+  });
+</script>
+
+<h1>Welcome to TTT!</h1>
+
+<br /><br />
+
+<div class="board-container container-fluid col-xs-offset-3">
+  <div class="grid-row clr">
+    <div class="square col-xs-3" data-index="0"></div><div class="square col-xs-3" data-index="1"></div><div class="square col-xs-3" data-index="2"></div>
+  </div><br />
+
+  <div class="grid-row clr">
+    <div class="square col-xs-3" data-index="3"></div><div class="square col-xs-3" data-index="4"></div><div class="square col-xs-3" data-index="5"></div>    
+  </div><br />
+  
+  <div class="grid-row clr">
+    <div class="square col-xs-3" data-index="6"></div><div class="square col-xs-3" data-index="7"></div><div class="square col-xs-3" data-index="8"></div>    
+  </div>  
+</div>

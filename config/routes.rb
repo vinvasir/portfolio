@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'frontendapps/calc', :to => 'frontendapps#calc'
   get 'frontendapps/oocalc', :to => 'frontendapps#oocalc'
   get 'frontendapps/pomodoro', :to => 'frontendapps#pomodoro'
+  get 'frontendapps/tictactoe', :to => 'frontendapps#tictactoe'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
